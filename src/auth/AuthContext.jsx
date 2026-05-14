@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState,} from "react";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -17,9 +18,9 @@ export const AuthProvider = ({ children }) => {
   // Login function
   const login = async (username, password) => {
     //try {
-      const res = await AuthContext.post("/api/auth/login", { username, password });
+      const res = await axios.post("http://localhst:8001/api/auth/login", { username, password });
 
-      // const { token, user } = res.data;
+      const token = res.data.token;
 
       // Save token
       localStorage.setItem("token", token);
@@ -49,6 +50,4 @@ export const AuthProvider = ({ children }) => {
 };
 
 // Custom hook
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);
