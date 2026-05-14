@@ -3,7 +3,9 @@ import api from "../api/axiosInstance";
 
 const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
+const api = createContext();
+
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   // Restore auth state from localStorage on app load
@@ -17,8 +19,11 @@ export function AuthProvider({ children }) {
 
   // Login function
   const login = async (username, password) => {
-    // try {
-      const res = await api.post("/api/auth/login", {username,password});
+    try {
+      const res = await api.post("/api/auth/login", {
+        username,
+        password,
+      });
 
       // const { token, user } = res.data;
 
