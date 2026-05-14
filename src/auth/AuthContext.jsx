@@ -1,9 +1,6 @@
 import { createContext, useContext, useEffect, useState,} from "react";
-import api from "../api/axiosInstance";
 
 const AuthContext = createContext();
-
-const api = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -19,11 +16,8 @@ export const AuthProvider = ({ children }) => {
 
   // Login function
   const login = async (username, password) => {
-    try {
-      const res = await api.post("/api/auth/login", {
-        username,
-        password,
-      });
+    //try {
+      const res = await AuthContext.post("/api/auth/login", { username, password });
 
       // const { token, user } = res.data;
 
